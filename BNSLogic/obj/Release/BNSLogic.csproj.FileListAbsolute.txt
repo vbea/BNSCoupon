@@ -1,0 +1,7 @@
+E:\BNSCoupon\BNSLogic\bin\Release\BNSLogic.dll
+E:\BNSCoupon\BNSLogic\bin\Release\BNSLogic.pdb
+E:\BNSCoupon\BNSLogic\bin\Release\BNSViews.dll
+E:\BNSCoupon\BNSLogic\bin\Release\BNSViews.pdb
+E:\BNSCoupon\BNSLogic\obj\Release\BNSLogic.csprojResolveAssemblyReference.cache
+E:\BNSCoupon\BNSLogic\obj\Release\BNSLogic.dll
+E:\BNSCoupon\BNSLogic\obj\Release\BNSLogic.pdb

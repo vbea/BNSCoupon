@@ -1,0 +1,359 @@
+﻿body {
+    background-color: white;
+}
+
+img {
+    border-style: none;
+    width: 16px;
+}
+
+a:link {
+    color: blue;
+    text-decoration: none;
+}
+
+a:visited {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #F75733;
+    text-decoration: underline;
+}
+
+.menudiv {
+    width: 100%;
+    height: 35px;
+    background-color: #F75733;
+}
+
+.chi_div {
+    width: 100%;
+    padding: 10px;
+}
+
+.menu {
+    width: 98%;
+    height: 35px;
+    padding: 0px;
+    padding-left: 15px;
+}
+
+    .menu li {
+        width: 75px;
+        list-style: none;
+        float: left;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        line-height: 33px;
+        background-color: #F75733;
+    }
+
+        .menu li a {
+            display: block;
+            text-align: center;
+            height: 31px;
+            font-size: 12pt;
+        }
+
+            .menu li a:link {
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                background-color: #F75733;
+            }
+
+            .menu li a:visited {
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                background-color: #F75733;
+            }
+
+            .menu li a:hover {
+                color: #DDDDDD;
+                font-weight: bold;
+                text-decoration: none;
+                background: #e44a26;
+            }
+
+.btn_normal {
+    border: 0px solid #F75733;
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 0px 10px;
+    height: 100%;
+}
+
+.btn_press {
+    border: 0px solid #F75733;
+    background-color: #F75733;
+    color: white;
+    text-align: center;
+    padding: 0px 10px;
+    height: 100%;
+}
+
+.grid_b {
+    border: 1px solid #F75733;
+}
+
+.grid_page {
+    background-color:#F75733;
+}
+
+.grid_page a {
+    color:white;
+}
+
+.div_x {
+    width: 70%;
+    color: #F75733;
+}
+
+.table_x {
+    width: 100%;
+}
+
+    .table_x tr td {
+        width: 33%;
+        text-align: left;
+    }
+
+.table_h {
+    border: 1px solid #F75733;
+    border-collapse: collapse;
+}
+
+    .table_h tr {
+        border: 1px solid #F75733;
+        border-collapse: collapse;
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+        .table_h tr td {
+            height: 25px;
+            text-align: center;
+        }
+
+.table_s {
+    border: 1px solid #F75733;
+    border-collapse: collapse;
+}
+
+    .table_s tr {
+        border: 1px solid #F75733;
+        border-collapse: collapse;
+    }
+
+        .table_s tr td {
+            border: 1px solid #F75733;
+            border-collapse: collapse;
+            padding-right: 2px;
+        }
+
+.table_ss {
+    border-collapse: collapse;
+}
+
+    .table_ss tr {
+        border-collapse: collapse;
+    }
+
+        .table_ss tr td {
+            border: 1px solid #F75733;
+            border-collapse: collapse;
+            padding-right: 2px;
+        }
+
+.table_sh {
+    width:100%;
+    border: 1px solid #F75733;
+    border-collapse: collapse;
+}
+
+    .table_sh tr {
+        width:100%;
+        border: 1px solid #F75733;
+        border-collapse: collapse;
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+.div_set {
+    width: 80%;
+    border: 1px dashed #F75733;
+    padding: 5px;
+}
+
+.table_th {
+    background-color: #F75733;
+    color: white;
+}
+
+.input_trans {
+    background-color: #EEEEEE;
+    border-style: none;
+    padding-right: 5px;
+}
+
+.table_p tr td {
+    text-align: center;
+}
+
+.search {
+    width:100%;
+    height: 25px;
+    vertical-align: central;
+    margin: 0 auto;
+    background-color: transparent;
+    border: 1px solid #F75733;
+    padding: 3px 2px 3px 2px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    margin: 1px 0px;
+}
+
+.search_btn {
+    height: 25px !important;
+    border-style: none;
+    background-color: #F75733;
+    color: white;
+    padding: 5px 8px 5px 8px;
+    font-size: 12px;
+    height: auto;
+    margin-left: -2px;
+    cursor: pointer;
+}
+
+.pan_input {
+    width: 98%;
+}
+
+.store_cell {
+    vertical-align: top;
+    width: 20%;
+}
+
+.store_table {
+    width: 100%;
+    border: 1px solid #F75733;
+    border-left-width: 4px;
+}
+
+    .store_table tr td {
+        vertical-align: top;
+    }
+
+.store_id {
+    color: #F75733;
+}
+
+.store_cost {
+    color:#808080;
+    font-size:15px;
+    text-decoration:line-through;
+}
+
+.store_price {
+    color: red;
+    font-size: 18px;
+}
+
+.store_pricerow{
+    text-align:center;
+}
+
+.store_category {
+    color: #808080;
+    font-size: 12px;
+}
+
+.store_maxs {
+    width:20%;
+    text-align:right;
+    color: #808080;
+    font-size: 12px;
+}
+
+.store_b {
+    text-align: right;
+}
+
+.store_buy {
+    color: white;
+    background-color: #F75733;
+    padding: 4px 8px;
+    border-style: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.store_hid {
+    width: 20%;
+}
+
+.store_hin {
+    width: 40%;
+}
+.btn_disable{
+    color: white;
+    background-color:#808080;
+    padding: 3px 5px 3px 5px;
+    border-style: none;
+}
+.pan_order{
+    width:100%;
+    height:490px;
+}
+.timeClose{
+    color:white;
+    padding-right:3px;
+    cursor: pointer;
+    text-decoration:none;
+}
+.timeClose:hover{
+    color:#ffd800;
+    padding-right:3px;
+    cursor: pointer;
+    text-decoration:none;
+}
+.pre_min{
+    width:10%;
+    text-align:right;
+    padding-right:3px;
+    color:black;
+}
+.pre_max{
+    width:85%;
+    text-align:left;
+    padding-left:3px;
+}
+.pre_pillar{
+    height:100%;
+    background-color:#F75733;
+    color:white;
+    border:none;
+}
+.pre_table{
+    width:100%;
+    padding:2px 10px 0px 5px;
+    margin-left:5px;
+}
+
+.btn_action {
+    color: white;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #F75733;
+    box-shadow: 0px 1px 5px rgba(247,87,51,.7);
+}
+
+.btn_action:active {
+    box-shadow: none;
+}
