@@ -1080,7 +1080,7 @@ namespace BNSLogic
         /// <returns>数据集</returns>
         public DataSet getCategory()
         {
-            string sql = "select * from Category";
+            string sql = "select * from Category order by id desc";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             try

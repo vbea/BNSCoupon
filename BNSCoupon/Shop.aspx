@@ -80,7 +80,7 @@
                 <tr>
                     <td style="text-align: right; width: 30%; color: #F55733;">超额购买：</td>
                     <td>
-                        <asp:TextBox ID="txtActurl" runat="server" Style="width: 50px; background-color: transparent; border-style: none;" AutoPostBack="True" OnTextChanged="txtActurl_TextChanged" MaxLength="4">1</asp:TextBox>
+                        <asp:TextBox ID="txtActurl" runat="server" Style="width:100px; background-color: transparent; border-style: none;" AutoPostBack="True" OnTextChanged="txtActurl_TextChanged" MaxLength="4">1</asp:TextBox>
                     </td>
                 </tr>
                 <tr id="trMore" runat="server" visible="false">

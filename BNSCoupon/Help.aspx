@@ -49,17 +49,20 @@
                 <tr>
                     <td>8.进行点券数据补登</td>
                 </tr>
+                <tr>
+                    <td>9.商城数据维护</td>
+                </tr>
             </table>
         </div>
         <br />
         <font color="#F75733">关于：</font>
         <div class="div_set">
             <font color="#F75733">账号点券管理器</font><br />
-            版本：v3.0<br />
+            版本：v3.2<br />
             制作：邠心工作室<br />
-            更新时间：2018年07月22日<br />
+            更新时间：2019年07月28日<br />
             <br />
-            <font size="3">&copy;2015-2018, VBE Studio</font>
+            <font size="3">&copy;2015-2019, VBE Studio</font>
         </div>
     </div>
 </asp:Content>

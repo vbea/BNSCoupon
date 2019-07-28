@@ -33,7 +33,7 @@
                             <td>
                                 <ul class="menu" style="margin: 0px 0px 0px 0px; border: 0px;">
                                     <li><a href="BNSCoupon.aspx">首页</a></li>
-                                    <li><a href="Coupons.aspx">补登</a></li>
+                                    <li><a href="Coupons.aspx">点券</a></li>
                                     <li><a href="Account.aspx">账号</a></li>
                                     <li><a href="Vocation.aspx">职业</a></li>
                                     <li><a href="Preference.aspx">统计</a></li>
@@ -42,8 +42,9 @@
                                     <li><a href="Help.aspx">帮助</a></li>
                                     <li><a href="http://bns.qq.com/main.shtml" target="_blank">官网</a></li>
                                     <li><a href="http://bns.gamebbs.qq.com/forum.php?mod=forumdisplay&fid=30929" target="_blank">论坛</a></li>
-                                    <li><a href="bns/index.html" target="_blank">门派</a></li>
-                                    <li><a href="bns/picture/index.html" target="_blank">相册</a></li>
+                                    <li><a href="http://www.bilibili.com/" target="_blank">视频</a></li>
+                                    <!--li><a href="bns/index.html" target="_blank">门派</a></!--li>
+                                    <li><a href="bns/picture/index.html" target="_blank">相册</a></li-->
                                 </ul>
                             </td>
                             <td>

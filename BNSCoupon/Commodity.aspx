@@ -8,7 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="content" runat="server">
     <div class="chi_div">
-        <asp:GridView ID="gdCommodity" CellPadding="4" GridLines="None" runat="server" CssClass="grid_b" AutoGenerateColumns="False" Width="80%" AllowPaging="True" OnPageIndexChanging="gdCommodity_PageIndexChanging" OnRowDataBound="gdCommodity_RowDataBound" PageSize="12">
+        <asp:GridView ID="gdCommodity" CellPadding="4" GridLines="None" runat="server" CssClass="grid_b" AutoGenerateColumns="False" Width="90%" AllowPaging="True" OnPageIndexChanging="gdCommodity_PageIndexChanging" OnRowDataBound="gdCommodity_RowDataBound" PageSize="15">
             <AlternatingRowStyle BackColor="#E7F7EF" />
             <Columns>
                 <asp:TemplateField>
