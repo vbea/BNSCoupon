@@ -1,5 +1,0 @@
-E:\BNSCoupon\BNSViews\bin\Release\BNSViews.dll
-E:\BNSCoupon\BNSViews\bin\Release\BNSViews.pdb
-E:\BNSCoupon\BNSViews\obj\Release\BNSViews.csprojResolveAssemblyReference.cache
-E:\BNSCoupon\BNSViews\obj\Release\BNSViews.dll
-E:\BNSCoupon\BNSViews\obj\Release\BNSViews.pdb
