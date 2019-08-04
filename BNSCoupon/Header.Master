@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="css/common.css" rel="Stylesheet" />
     <link rel="Shortcut Icon" href="images/favicon.ico" />
-    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <title>
         <asp:ContentPlaceHolder ID="head" runat="server">
         </asp:ContentPlaceHolder>
@@ -43,8 +43,9 @@
                                     <li><a href="http://bns.qq.com/main.shtml" target="_blank">官网</a></li>
                                     <li><a href="http://bns.gamebbs.qq.com/forum.php?mod=forumdisplay&fid=30929" target="_blank">论坛</a></li>
                                     <li><a href="http://www.bilibili.com/" target="_blank">视频</a></li>
-                                    <!--li><a href="bns/index.html" target="_blank">门派</a></!--li>
-                                    <li><a href="bns/picture/index.html" target="_blank">相册</a></li-->
+                                    <li><a href="bns/index.html" target="_blank">门派</a></li>
+                                    <li><a href="JavaAudio.aspx">音节码</a></li>
+                                    <li><a href="JavaVideo.aspx" target="_blank">音节码转换</a></li>
                                 </ul>
                             </td>
                             <td>

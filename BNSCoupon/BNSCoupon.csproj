@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -82,6 +83,8 @@
     <Content Include="images\expand.png" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\shrink.png" />
+    <Content Include="JavaAudio.aspx" />
+    <Content Include="JavaVideo.aspx" />
     <Content Include="js\asyncbox\AsyncBox.v1.4.5.js" />
     <Content Include="js\asyncbox\jQuery.v1.4.2.js" />
     <Content Include="js\asyncbox\skins\ZCMS\asyncbox.css" />
@@ -173,6 +176,20 @@
     </Compile>
     <Compile Include="Help.aspx.designer.cs">
       <DependentUpon>Help.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JavaAudio.aspx.cs">
+      <DependentUpon>JavaAudio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JavaAudio.aspx.designer.cs">
+      <DependentUpon>JavaAudio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JavaVideo.aspx.cs">
+      <DependentUpon>JavaVideo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JavaVideo.aspx.designer.cs">
+      <DependentUpon>JavaVideo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Money.aspx.cs">
       <DependentUpon>Money.aspx</DependentUpon>
