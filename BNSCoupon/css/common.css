@@ -45,7 +45,7 @@ a:hover {
 }
 
     .menu li {
-        width: 75px;
+        min-width: 65px;
         list-style: none;
         float: left;
         padding-top: 2px;
@@ -59,6 +59,7 @@ a:hover {
             text-align: center;
             height: 31px;
             font-size: 12pt;
+            padding: 0 10px;
         }
 
             .menu li a:link {
@@ -83,21 +84,21 @@ a:hover {
             }
 
 .btn_normal {
-    border: 0px solid #F75733;
+    border: 1px solid #F75733;
     background-color: white;
     color: black;
     text-align: center;
-    padding: 0px 10px;
+    padding: 5px 10px;
     height: 100%;
     cursor: pointer;
 }
 
 .btn_press {
-    border: 0px solid #F75733;
+    border: 1px solid #F75733;
     background-color: #F75733;
     color: white;
     text-align: center;
-    padding: 0px 10px;
+    padding: 5px 10px;
     height: 100%;
     pointer-events: none;
 }
@@ -362,4 +363,10 @@ a:hover {
 
 .btn_action:active {
     box-shadow: none;
+}
+
+.tap_table {
+    background-color: #F75733;
+    border-collapse: collapse;
+    padding: 1px;
 }

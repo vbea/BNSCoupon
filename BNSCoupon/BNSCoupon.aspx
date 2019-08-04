@@ -14,9 +14,8 @@
         <table style="border-collapse: collapse;">
             <tr style="border-collapse: collapse;">
                 <td style="color:#F75733;">视图：</td>
-                <td style="background-color: #F75733; border-collapse: collapse; padding: 1px;">
-                    <asp:Button ID="btnGeneral" runat="server" Text="普通" OnClick="btnGeneral_Click" CssClass="btn_press" /></td>
-                <td style="background-color: #F75733; border-collapse: collapse; padding: 1px;">
+                <td style="display:flex;padding-top:4px;">
+                    <asp:Button ID="btnGeneral" runat="server" Text="普通" OnClick="btnGeneral_Click" CssClass="btn_press" />
                     <asp:Button ID="btnDetail" runat="server" Text="详细" OnClick="btnDetail_Click" CssClass="btn_normal" />
                 </td>
                 <td style="color:#F75733; padding-left:10px;">选项：</td>
