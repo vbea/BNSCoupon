@@ -50,15 +50,31 @@
         <div style="width: 100%;">
             <asp:MultiView ID="multiView" runat="server">
                 <asp:View ID="viewGeneral" runat="server">
-                    <asp:GridView ID="gvDataList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" Width="70%" CssClass="grid_b" OnRowDataBound="gvDataList_RowDataBound">
+                    <asp:GridView ID="gvDataList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" Width="80%" CssClass="grid_b" OnRowDataBound="gvDataList_RowDataBound">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    <table width="100%"><tr><td style="width: 5%; text-align: center;">ID</td><td style="width: 12%; text-align: center;">账号</td><td style="width: 15%; text-align: center;">昵称</td><td style="width: 9%; text-align: center;">性别</td><td style="width: 10%; text-align: center;">种族</td><td style="width: 11%; text-align: center;">职业</td><td style="width: 11%; text-align: center;">等级</td><td style="width: 12%; text-align: center;">剩余点券</td><td style="width: 10%; text-align: center;">是否检查</td><td style="width: 5%; text-align: center;">商城</td></tr></table>
+                                    <table width="100%">
+                                        <tr>
+                                            <td style="width: 5%; text-align: center;">ID</td><td style="width: 12%; text-align: center;">账号</td>
+                                            <td style="width: 15%; text-align: center;">昵称</td><td style="width: 5%; text-align: center;">性别</td>
+                                            <td style="width: 6%; text-align: center;">种族</td><td style="width: 10%; text-align: center;">职业</td>
+                                            <td style="width: 10%; text-align: center;">等级</td><td style="width: 12%; text-align: center;">剩余点券</td>
+                                            <td style="width: 10%; text-align: center;">剩余积分</td><td style="width: 10%; text-align: center;">是否检查</td>
+                                            <td style="width: 5%; text-align: center;">商城</td>
+                                        </tr>
+                                    </table>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <table width="100%"><tr><td style="width: 5%; text-align: center;"><%# Eval("id") %></td><td style="width: 12%; text-align: center;"><%# showAccount(Eval("qq").ToString()) %></td><td style="width: 15%; text-align: center;"><%# Eval("name") %></td><td style="width: 9%; text-align: center;"><%# Eval("gender") %></td><td style="width: 10%; text-align: center;"><%# Eval("race") %></td><td style="width: 11%; text-align: center;"><%# Eval("vocation") %></td><td style="width: 11%; text-align: center;"><asp:Label ID="labViewLevels" runat="server" Text='<%# showLevel(Eval("level"),Eval("stard")) %>'></asp:Label></td><td style="width: 12%; text-align: center;"><%# Eval("coupon") %></td><td style="width: 10%; text-align: center;" title='<%# "上次检查时间: "+Convert.ToDateTime(Eval("checkdate")).ToString("yyyy年MM月dd日") %>'><%# isCheckd(Convert.ToDateTime(Eval("checkdate"))) %></td><td style="width: 5%; text-align: center;"><asp:HyperLink ID="hlnkGoo" runat="server" NavigateUrl='<%# "~/Store.aspx?id=" + Eval("id") %>' Visible='<%# showStore(Convert.ToInt32(Eval("coupon"))) %>'>去消费</asp:HyperLink></td></tr></table>
+                                    <table width="100%"><tr>
+                                        <td style="width: 5%; text-align: center;"><%# Eval("id") %></td><td style="width: 12%; text-align: center;"><%# showAccount(Eval("qq").ToString()) %></td>
+                                        <td style="width: 15%; text-align: center;"><%# Eval("name") %></td><td style="width: 5%; text-align: center;"><%# Eval("gender") %></td>
+                                        <td style="width: 6%; text-align: center;"><%# Eval("race") %></td><td style="width: 10%; text-align: center;"><%# Eval("vocation") %></td>
+                                        <td style="width: 10%; text-align: center;"><asp:Label ID="labViewLevels" runat="server" Text='<%# showLevel(Eval("level"),Eval("stard")) %>'></asp:Label></td>
+                                        <td style="width: 12%; text-align: center;"><%# Eval("coupon") %></td><td style="width: 10%; text-align: center;"><a href='<%# "/StorePoint.aspx?id=" + Eval("id") %>'><%# Eval("point") %></a></td>
+                                        <td style="width: 10%; text-align: center;" title='<%# "上次检查时间: "+Convert.ToDateTime(Eval("checkdate")).ToString("yyyy年MM月dd日") %>'><%# isCheckd(Convert.ToDateTime(Eval("checkdate"))) %></td>
+                                        <td style="width: 5%; text-align: center;"><asp:HyperLink ID="hlnkGoo" runat="server" NavigateUrl='<%# "~/Store.aspx?id=" + Eval("id") %>' Visible='<%# showStore(Convert.ToInt32(Eval("coupon"))) %>'>去消费</asp:HyperLink></td></tr></table>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -72,10 +88,29 @@
                     </asp:GridView>
                 </asp:View>
                 <asp:View ID="viewDetail" runat="server">
-                    <asp:GridView ID="gvDetailList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" Width="92%" CssClass="grid_b" OnRowDataBound="gvDetailList_RowDataBound">
+                    <asp:GridView ID="gvDetailList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" Width="96%" CssClass="grid_b" OnRowDataBound="gvDetailList_RowDataBound">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
-                            <asp:TemplateField><HeaderTemplate><table width="100%"><tr><td style="width: 4%; text-align: center;">ID</td><td style="width: 10%; text-align: center;">账号</td><td style="width: 9%; text-align: center;">密码</td><td style="width: 11%; text-align: center;">昵称</td><td style="width: 4%; text-align: center;">性别</td><td style="width: 5%; text-align: center;">种族</td><td style="width: 5%; text-align: center;">职业</td><td style="width: 12%; text-align: center;">注册时间</td><td style="width: 5%; text-align: center;">等级</td><td style="width: 5%; text-align: center;">星级</td><td style="width: 8%; text-align: center;">剩余点券</td><td style="width: 12%; text-align: center;">说明</td><td style="width: 5%; text-align: center;">是否检查</td><td style="width: 5%; text-align: center;">商城</td></tr></table></HeaderTemplate><ItemTemplate><table width="100%"><tr><td style="width: 4%; text-align: center;"><%# Eval("id") %></td><td style="width: 10%; text-align: center;"><%# showAccount(Eval("qq").ToString()) %></td><td style="width: 9%; text-align: center;"><%# showAccount(Eval("psd").ToString()) %></td><td style="width: 11%; text-align: center;"><%# Eval("name") %></td><td style="width: 4%; text-align: center;"><%# Eval("gender") %></td><td style="width: 5%; text-align: center;"><%# Eval("race") %></td><td style="width: 5%; text-align: center;"><%# Eval("vocation") %></td><td style="width: 12%; text-align: center;"><%# ((DateTime)Eval("redate")).ToString("yyyy年MM月dd日") %></td><td style="width: 5%; text-align: center;"><asp:Label ID="labViewLevel" runat="server" Text='<%# Eval("level") %>'></asp:Label></td><td style="width: 5%; text-align: center;"><asp:Label ID="labViewStard" runat="server" Text='<%# Eval("stard") %>'></asp:Label></td><td style="width: 8%; text-align: center;"><%# Eval("coupon") %></td><td style="width: 12%; text-align: center;"><%# Eval("remark") %></td><td style="width: 5%; text-align: center;"  title='<%# "上次补登时间: "+Convert.ToDateTime(Eval("checkdate")).ToString("yyyy年MM月dd日") %>'><%# isCheckd(Convert.ToDateTime(Eval("checkdate"))) %></td><td style="width: 5%; text-align: center;"><asp:HyperLink ID="hlnkGoo" runat="server" NavigateUrl='<%# "~/Store.aspx?id=" + Eval("id") + "&s=" + chkExpanstor.Checked %>' Visible='<%# showStore(Convert.ToInt32(Eval("coupon"))) %>'>去消费</asp:HyperLink></td></tr></table></ItemTemplate></asp:TemplateField>
+                            <asp:TemplateField><HeaderTemplate><table width="100%"><tr>
+                                <td style="width: 4%; text-align: center;">ID</td><td style="width: 9%; text-align: center;">账号</td>
+                                <td style="width: 8%; text-align: center;">密码</td><td style="width: 10%; text-align: center;">昵称</td>
+                                <td style="width: 4%; text-align: center;">性别</td><td style="width: 4%; text-align: center;">种族</td>
+                                <td style="width: 5%; text-align: center;">职业</td><td style="width: 9%; text-align: center;">注册时间</td>
+                                <td style="width: 5%; text-align: center;">等级</td><td style="width: 5%; text-align: center;">星级</td>
+                                <td style="width: 8%; text-align: center;">剩余点券</td><td style="width: 8%; text-align: center;">剩余积分</td>
+                                <td style="width: 11%; text-align: center;">说明</td><td style="width: 5%; text-align: center;">是否检查</td>
+                                <td style="width: 5%; text-align: center;">商城</td></tr>
+                            </table></HeaderTemplate>
+                            <ItemTemplate><table width="100%"><tr>
+                                <td style="width: 4%; text-align: center;"><%# Eval("id") %></td><td style="width: 9%; text-align: center;"><%# showAccount(Eval("qq").ToString()) %></td>
+                                <td style="width: 8%; text-align: center;"><%# showAccount(Eval("psd").ToString()) %></td><td style="width: 10%; text-align: center;"><%# Eval("name") %></td>
+                                <td style="width: 4%; text-align: center;"><%# Eval("gender") %></td><td style="width: 4%; text-align: center;"><%# Eval("race") %></td>
+                                <td style="width: 5%; text-align: center;"><%# Eval("vocation") %></td><td style="width: 9%; text-align: center;"><%# ((DateTime)Eval("redate")).ToString("yyyy年MM月dd日") %></td>
+                                <td style="width: 5%; text-align: center;"><asp:Label ID="labViewLevel" runat="server" Text='<%# Eval("level") %>'></asp:Label></td><td style="width: 5%; text-align: center;"><asp:Label ID="labViewStard" runat="server" Text='<%# Eval("stard") %>'></asp:Label></td>
+                                <td style="width: 8%; text-align: center;"><%# Eval("coupon") %></td><td style="width: 8%; text-align: center;"><%# Eval("point") %></td>
+                                <td style="width: 11%; text-align: center;"><%# Eval("remark") %></td><td style="width: 5%; text-align: center;"  title='<%# "上次补登时间: "+Convert.ToDateTime(Eval("checkdate")).ToString("yyyy年MM月dd日") %>'><%# isCheckd(Convert.ToDateTime(Eval("checkdate"))) %></td>
+                                <td style="width: 5%; text-align: center;"><asp:HyperLink ID="hlnkGoo" runat="server" NavigateUrl='<%# "~/Store.aspx?id=" + Eval("id") + "&s=" + chkExpanstor.Checked %>' Visible='<%# showStore(Convert.ToInt32(Eval("coupon"))) %>'>去消费</asp:HyperLink></td>
+                            </tr></table></ItemTemplate></asp:TemplateField>
                         </Columns>
                         <EmptyDataTemplate>
                             <div style="width: 100%; text-align: center;">当前没有数据，请添加！</div>

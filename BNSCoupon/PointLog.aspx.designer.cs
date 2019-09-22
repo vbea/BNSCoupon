@@ -10,7 +10,7 @@
 namespace BNSCoupon {
     
     
-    public partial class Storehouse {
+    public partial class PointLog {
         
         /// <summary>
         /// litTitle 控件。
@@ -22,84 +22,57 @@ namespace BNSCoupon {
         protected global::System.Web.UI.WebControls.Literal litTitle;
         
         /// <summary>
-        /// txtName 控件。
+        /// hlkStore 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
+        protected global::System.Web.UI.WebControls.HyperLink hlkStore;
         
         /// <summary>
-        /// ddlCategory 控件。
+        /// labTitle 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
+        protected global::System.Web.UI.WebControls.Literal labTitle;
         
         /// <summary>
-        /// txtCost 控件。
+        /// ddlDatadiff 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCost;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDatadiff;
         
         /// <summary>
-        /// txtPrice 控件。
+        /// litRecordCount 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrice;
+        protected global::System.Web.UI.WebControls.Literal litRecordCount;
         
         /// <summary>
-        /// txtMaxs 控件。
+        /// litPager 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMaxs;
+        protected global::System.Web.UI.WebControls.Literal litPager;
         
         /// <summary>
-        /// chkPoint 控件。
+        /// gvOrderList 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkPoint;
-        
-        /// <summary>
-        /// txtMark 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMark;
-        
-        /// <summary>
-        /// hidAction 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidAction;
-        
-        /// <summary>
-        /// btnSave 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.GridView gvOrderList;
     }
 }

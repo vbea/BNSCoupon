@@ -1,39 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Header.Master" AutoEventWireup="true" CodeBehind="Store.aspx.cs" Inherits="BNSCoupon.Store" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Header.Master" AutoEventWireup="true" CodeBehind="StorePoint.aspx.cs" Inherits="BNSCoupon.StorePoint" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    商城
+    积分商城
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="conTitle" runat="server">
     <div class="chi_div">
-        <a href="BNSCoupon.aspx">账号列表</a>-商城
+        <a href="BNSCoupon.aspx">账号列表</a>-积分商城
             <table style="width: 50%; height: 30px; border-collapse: collapse;">
-                <tr style="width: 100%; height: 30px; border-collapse: collapse;">
-                    <td style="width: 20%; height: 30px;">商品搜索：</td>
-                    <td style="width: 15%; text-align: right; height: 30px;">按照分类：</td>
-                    <td style="width: 20%; height: 30px;">
-                        <asp:DropDownList ID="ddlCategory" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged">
-                            <asp:ListItem Value="0"> 请选择...</asp:ListItem>
-                        </asp:DropDownList></td>
-                    <td style="width: 15%; text-align: right; height: 30px;">按照关键字：</td>
-                    <td style="width: 20%; height: 100%; border-collapse: collapse; border: 0px;">
-                        <asp:TextBox ID="txtKeywords" runat="server" CssClass="search" onkeydown="if(event.keyCode==13) {document.all.btnSearch.focus(); document.all.btnSearch.click();}"></asp:TextBox>
-                    </td>
-                    <td style="height: 100%; text-align: left; border-collapse: collapse; margin-left: -2px;">
-                        <asp:Button ID="btnSearch" runat="server" Text="搜索" CssClass="search_btn" OnClick="btnSearch_Click" ClientIDMode="Static" />
-                    </td>
-                    <td style="height: 100%; text-align: left; border-collapse: collapse; padding-left:5px;">
-                       <asp:Button ID="btnBymon" runat="server" Text="购买金币" OnClientClick="openBuym();" CssClass="search_btn" UseSubmitBehavior="False"/>
-                       <asp:LinkButton ID="likHidden" runat="server" ClientIDMode="Static" OnClick="likHidden_Click"></asp:LinkButton>
-                    </td>
-                </tr>
                 <tr>
                     <td colspan="2">当前账号：<asp:Label ID="labAccount" runat="server" CssClass="store_id"></asp:Label></td>
                     <td colspan="2">账户余额：<asp:Label ID="labRemaining" runat="server" CssClass="store_id"></asp:Label></td>
-                    <td colspan="2">可用积分：<asp:HyperLink ID="labPoint" runat="server" CssClass="store_id"></asp:HyperLink></td>
-                    <td><asp:HiddenField ID="hidShowStore" runat="server" />
-                    </td>
                 </tr>
             </table>
+        <asp:LinkButton ID="likHidden" runat="server" ClientIDMode="Static" OnClick="likHidden_Click"></asp:LinkButton>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="content" runat="server">
@@ -43,11 +22,11 @@
         function openBuy(id, account) {
             asyncbox.open({
                 id: 'dialogBuy',
-                url: 'Shop.aspx',
+                url: 'ShopPoint.aspx',
                 width: 500,
                 height: 500,
                 data: { "commodity": id, "account": account },
-                title: '购买商品'
+                title: '积分购买商品'
             });
             /*var dialog = new Dialog("dialog" + id);
             dialog.Width = 450;
@@ -56,24 +35,6 @@
             dialog.URL = "Shop.aspx?commodity=" + id + "&account=" + account;
             dialog.ShowButtonRow = false;
             dialog.show();*/
-        }
-        function openBuym(account) {
-            asyncbox.open({
-                id: 'dialogBuym',
-                url: 'Money.aspx',
-                width: 450,
-                height: 400,
-                data: { "account": account },
-                title: '购买金币'
-            });
-            /*var dialog = new Dialog("money_" + account);
-            dialog.Width = 450;
-            dialog.Height = 400;
-            dialog.Title = "购买金币";
-            dialog.URL = "Money.aspx?account=" + account;
-            dialog.ShowButtonRow = false;
-            dialog.show();*/
-            return false;
         }
         function closeMoy(id) {
             asyncbox.close(id);
@@ -104,7 +65,7 @@
                                             </tr>
                                             <tr style="font-size: 14px;">
                                                 <td>单价:<%# Eval("cunit") %></td>
-                                                <td>总价:<%# Eval("price") %></td>
+                                                <td>总价:<%# Eval("point") %></td>
                                             </tr>
                                         </table>
                                     </ItemTemplate>

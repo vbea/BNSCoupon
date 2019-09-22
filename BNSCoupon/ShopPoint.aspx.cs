@@ -10,7 +10,8 @@ using System.Web.UI.WebControls;
 
 namespace BNSCoupon
 {
-    public partial class Shop : System.Web.UI.Page
+    //Add on 20190922 by vbe
+    public partial class ShopPoint : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,50 +33,27 @@ namespace BNSCoupon
             if (rows.Count > 0)
             {
                 labAccount.Text = rows[0]["qq"].ToString();
-                labRemaining.Text = rows[0]["coupon"].ToString();
+                labRemaining.Text = rows[0]["point"].ToString();
                 litHello.Text = "Hi：" + rows[0]["name"];
-                hidPoint.Value = rows[0]["point"].ToString();
             }
         }
 
         private void getCommodity(CouponBLL bll, int id)
         {
-            DataSet ds = bll.getCommodityListById(id);
+            DataSet ds = bll.getPointData(id);
             if (ds.Tables[0].Rows.Count > 0)
             {
                 DataRow row = ds.Tables[0].Rows[0];
-                long price = Convert.ToInt32(row["price"]);
+                int max = Convert.ToInt32(row["maxs"]);
+                int point  = Convert.ToInt32(row["point"]);
                 labConmmoid.Text = row["id"].ToString();
                 labCommodity.Text = row["name"].ToString();
-                labCategory.Text = row["catename"].ToString();
                 labRemark.Text = row["mark"].ToString();
-                if (Convert.ToBoolean(row["hasPoint"]))
-                {
-                    hidHasPoint.Value = "Y";
-                } else {
-                    hidHasPoint.Value = "N";
-                    palPoint.Visible = false;
-                }
-                //Changed on 20150829 vbe -start
-                if (!row["cost"].Equals(DBNull.Value))
-                {
-                    int cost = Convert.ToInt32(row["cost"]);
-                    if (cost != 0)
-                    {
-                        trConst.Visible = true;
-                        labCostprice.Text = cost.ToString();
-                    }
-                    else
-                        trConst.Visible = false;
-                }
-                labUnitprice.Text = price.ToString();
-                int max = Convert.ToInt32(row["maxs"]);
+                labPoint.Text = point.ToString();
                 btnAdd.Enabled = btnReduce.Enabled = !(max == 0 || max == 1);
                 labMaxs.Text = max.ToString();
-                //Changed on 20150829 vbe -stop
-                labPrice.Text = price.ToString();
-                getPoint(price);
-                labBalance.Text = ""+(Convert.ToInt64(labRemaining.Text) - price);
+                labPrice.Text = point.ToString();
+                labBalance.Text = ""+(Convert.ToInt64(labRemaining.Text) - point);
                 setButtonState(labRemaining.Text, labPrice.Text);
             }
         }
@@ -99,17 +77,9 @@ namespace BNSCoupon
         protected void btnBuy_Click(object sender, EventArgs e)
         {
             CouponBLL bll = new CouponBLL();
-            bool result = false;
-            if (hidHasPoint.Value.Equals("Y"))
+            if (bll.deductPoint(Convert.ToInt32(Request.QueryString["account"]), Convert.ToInt64(labBalance.Text)))
             {
-                long point = (Convert.ToInt64(labPoint.Text) + Convert.ToInt64(hidPoint.Value));
-                result = bll.deductCoupon(Convert.ToInt32(Request.QueryString["account"]), Convert.ToInt64(labBalance.Text), point);
-            } else {
-                result = bll.deductCoupon(Convert.ToInt32(Request.QueryString["account"]), Convert.ToInt64(labBalance.Text));
-            }
-            if (result)
-            {
-                bll.addOrderLog(Convert.ToInt32(Request.QueryString["account"]), Convert.ToInt32(labConmmoid.Text), labCommodity.Text, Convert.ToInt32(labUnitprice.Text), Convert.ToInt32(txtCount.Text), Convert.ToInt32(labPrice.Text), DateTime.Now);
+                bll.addPointLog(Convert.ToInt32(Request.QueryString["account"]), Convert.ToInt32(labConmmoid.Text), labCommodity.Text, Convert.ToInt32(labPoint.Text), Convert.ToInt32(txtCount.Text), Convert.ToInt32(labPrice.Text), DateTime.Now);
                 ClientScript.RegisterStartupScript(GetType(), "back", "top.closeMoy('dialogBuy');", true);
                 //ClientScript.RegisterStartupScript(GetType(), "back", "<script>parent.document.getElementById(\"divClose\").click();</script>");
                 //Response.Redirect("Store.aspx?id=" + Request.QueryString["account"] + "&s=true");
@@ -124,11 +94,9 @@ namespace BNSCoupon
             {
                 txtCount.Text = (Convert.ToInt32(txtCount.Text) - 1).ToString();
                 long s = Convert.ToInt64(labRemaining.Text);
-                long t = Convert.ToInt64(labUnitprice.Text) * Convert.ToInt32(txtCount.Text);
+                long t = Convert.ToInt64(labPoint) * Convert.ToInt32(txtCount.Text);
                 labPrice.Text = t.ToString();
                 labBalance.Text = (s - t).ToString();
-                txtActurl.Text = txtCount.Text;
-                getPoint(t);
                 setButtonState(labRemaining.Text, labPrice.Text);
             }
         }
@@ -139,11 +107,9 @@ namespace BNSCoupon
             {
                 txtCount.Text = (Convert.ToInt32(txtCount.Text) + 1).ToString();
                 long s = Convert.ToInt64(labRemaining.Text);
-                long t = Convert.ToInt64(labUnitprice.Text) * Convert.ToInt32(txtCount.Text);
+                long t = Convert.ToInt64(labPoint.Text) * Convert.ToInt32(txtCount.Text);
                 labPrice.Text = t.ToString();
                 labBalance.Text = (s - t).ToString();
-                txtActurl.Text = txtCount.Text;
-                getPoint(t);
                 setButtonState(labRemaining.Text, labPrice.Text);
             }
         }
@@ -167,68 +133,18 @@ namespace BNSCoupon
             }
             finally
             {
-                txtActurl.Text = txtCount.Text;
                 long s = Convert.ToInt64(labRemaining.Text);
-                long t = Convert.ToInt64(labUnitprice.Text) * Convert.ToInt32(txtCount.Text);
+                long t = Convert.ToInt64(labPoint.Text) * Convert.ToInt32(txtCount.Text);
                 labPrice.Text = t.ToString();
                 labBalance.Text = (s - t).ToString();
-                txtActurl.Text = txtCount.Text;
-                getPoint(t);
-                setButtonState(labRemaining.Text, labPrice.Text);
-            }
-        }
-
-        protected void txtActurl_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Convert.ToInt32(txtActurl.Text) == 0)
-                    throw new FormatException();
-                int max = Convert.ToInt32(labMaxs.Text);
-                int act = Convert.ToInt32(txtActurl.Text);
-                if (max < act)
-                {
-                    if (act % max != 0)
-                        labShoptype.Text = "需在游戏中购买" + (act / max + 1) + "次，其中" + act / max + "次最大" + max + "个，1次" + act % max + "个";
-                    else
-                        labShoptype.Text = "需在游戏中最大数购买" + act / max + "次";
-                    txtCount.Text = txtActurl.Text;
-                    trMore.Visible = true;
-                }
-                else
-                {
-                    txtCount.Text = txtActurl.Text;
-                    trMore.Visible = false;
-                }
-            }
-            catch (FormatException)
-            {
-                trMore.Visible = false;
-                ClientScript.RegisterStartupScript(GetType(), "err", "<script>alert('请输入正确的数量！');</script>");
-                txtCount.Text = txtActurl.Text = "1";
-            }
-            finally
-            {
-                txtActurl.Text = txtCount.Text;
-                long s = Convert.ToInt64(labRemaining.Text);
-                long t = Convert.ToInt64(labUnitprice.Text) * Convert.ToInt32(txtCount.Text);
-                labPrice.Text = t.ToString();
-                labBalance.Text = (s - t).ToString();
-                getPoint(t);
                 setButtonState(labRemaining.Text, labPrice.Text);
             }
         }
 
         protected void linkMax_Click(object sender, EventArgs e)
         {
-            txtCount.Text = txtActurl.Text = labMaxs.Text;
+            txtCount.Text = labMaxs.Text;
             txtCount_TextChanged(sender, e);
-        }
-
-        public void getPoint(long price)
-        {
-            long point = price / 2;
-            labPoint.Text = "" + point;
         }
     }
 }

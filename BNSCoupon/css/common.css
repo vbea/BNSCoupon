@@ -256,7 +256,7 @@ a:hover {
     }
 
 .store_id {
-    color: #F75733;
+    color: #F75733 !important;
 }
 
 .store_cost {

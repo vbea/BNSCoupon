@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace BNSCoupon
 {
-    public partial class Store : System.Web.UI.Page
+    public partial class StorePoint : System.Web.UI.Page
     {
         public static bool isRefresh = false;
         protected void Page_Load(object sender, EventArgs e)
@@ -20,12 +20,9 @@ namespace BNSCoupon
             {
                 CouponBLL bll = new CouponBLL();
                 getAccount(bll, Convert.ToInt32(Request.QueryString["id"]));
-                getCategory(bll);
-                getSetting(bll);
-                gvOrderList.DataSource = bll.getOrderList(Convert.ToInt32(Request.QueryString["id"]));
+                gvOrderList.DataSource = bll.getOrderPointList(Convert.ToInt32(Request.QueryString["id"]));
                 gvOrderList.DataBind();
-                if (Convert.ToBoolean(hidShowStore.Value))
-                    getData(bll, txtKeywords.Text);
+                getData(bll);
             }
         }
 
@@ -33,19 +30,16 @@ namespace BNSCoupon
         {
             DataSet ds = bll.getAccountList(id);
             DataRowCollection rows = ds.Tables[0].Rows;
-            btnBymon.OnClientClick = "return openBuym(" + id + ");";
             if (rows.Count > 0)
             {
                 labAccount.Text = rows[0]["name"].ToString();
-                labRemaining.Text = "ஐ" + rows[0]["coupon"];
-                labPoint.Text = "￠" + rows[0]["point"];
-                labPoint.NavigateUrl = "/StorePoint.aspx?id=" + rows[0]["id"];
+                labRemaining.Text = "￠" + rows[0]["point"];
             }
         }
          
-        private void getData(CouponBLL bll, string key)
+        private void getData(CouponBLL bll)
         {
-            dataBind(bll.getCommodityList(key.Trim()));
+            dataBind(bll.getShopPontList());
         }
 
         private void getData(CouponBLL bll, int id)
@@ -83,7 +77,7 @@ namespace BNSCoupon
                         TableCell cell = new TableCell();
                         cell.CssClass = "store_cell";
                         //添加一列数据
-                        cell.Controls.Add(createStore(rowd["id"].ToString(), rowd["name"].ToString(), rowd["catename"].ToString(), rowd["cost"].ToString(), rowd["price"].ToString(), rowd["maxs"].ToString(), rowd["mark"].ToString()));
+                        cell.Controls.Add(createStore(rowd["id"].ToString(), rowd["name"].ToString(), rowd["point"].ToString(), rowd["maxs"].ToString(), rowd["mark"].ToString()));
                         row.Controls.Add(cell);
                     }
                     tabCommodity.Controls.Add(row);
@@ -103,19 +97,7 @@ namespace BNSCoupon
             }
         }
 
-        private void getCategory(CouponBLL bll)
-        {
-            DataSet ds = bll.getCategory();
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow row in ds.Tables[0].Rows)
-                {
-                    ddlCategory.Items.Add(new ListItem(row["catename"].ToString(), row["id"].ToString()));
-                }
-            }
-        }
-
-        private Table createStore(string id, string name, string category,string cost, string price, string maxs, string mark)
+        private Table createStore(string id, string name, string price, string maxs, string mark)
         {
             Table table = new Table();
             table.CssClass = "store_table";
@@ -151,7 +133,7 @@ namespace BNSCoupon
             table.Controls.Add(row0); 
             #endregion
             #region ROW1
-            TableRow row1 = new TableRow();
+            /*TableRow row1 = new TableRow();
             TableCell _cell2 = new TableCell();
             _cell2.ColumnSpan = 2;
             _cell2.CssClass = "store_category";
@@ -161,7 +143,7 @@ namespace BNSCoupon
             _cell3.Text = maxs;
             row1.Controls.Add(_cell2);
             row1.Controls.Add(_cell3);
-            table.Controls.Add(row1); 
+            table.Controls.Add(row1); */
             #endregion
             #region ROW2
             TableRow row2 = new TableRow();
@@ -170,26 +152,15 @@ namespace BNSCoupon
             cell1.CssClass = "store_pricerow";
             Label labcost = new Label();
             Label labprice = new Label();
-            labcost.CssClass = "store_cost";
+            labcost.CssClass = "store_maxs";
             labprice.CssClass = "store_price";
-            if (!cost.Equals("0"))
-                labcost.Text = " " + cost;
-            labprice.Text = " ஐ" + price;
-            cell1.Controls.Add(labcost);
+            labcost.Text = " " + maxs;
+            labprice.Text = " ￠" + price;
             cell1.Controls.Add(labprice);
+            cell1.Controls.Add(labcost);
             TableCell cell2 = new TableCell();
             cell2.CssClass = "store_b";
-            //Button btnBuy = new Button();
-            //btnBuy.ID = "btnBuy" + id;
-            //btnBuy.BorderStyle = BorderStyle.NotSet;
-            //btnBuy.CommandName = id;
-            //btnBuy.CssClass = "store_buy";
-            //btnBuy.OnClientClick = "openBuy(" + id + ")";
-            //btnBuy.UseSubmitBehavior = false;
-            //btnBuy.Text = "立即购买";
-            //cell2.Controls.Add(btnBuy);
             cell2.Text = "<input type='button' class='store_buy' value='立即购买' onclick='openBuy(" + id + "," + Request.QueryString["id"] + ");' />";
-            //cell2.Text = "<input type='button' class='store_buy' value='立即购买' onclick='openBuym(" + Request.QueryString["id"] + ");' />";
             row2.Controls.Add(cell1);
             row2.Controls.Add(cell2);
             table.Controls.Add(row2); 
@@ -197,58 +168,18 @@ namespace BNSCoupon
             return table;
         }
 
-        private void getSetting(CouponBLL bll)
-        {
-            DataSet ds = bll.getSettings();
-            foreach (DataRow row in ds.Tables[0].Rows)
-            {
-                if (row["keys"].ToString().Equals("showStore"))
-                {
-                    hidShowStore.Value = "" + Convert.ToBoolean(row["state"]);
-                    break;
-                }
-            }
-        }
-
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            ddlCategory.SelectedIndex = 0;
-            getData(new CouponBLL(), txtKeywords.Text);
-        }
-
-        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CouponBLL bll = new CouponBLL();
-            if (!ddlCategory.SelectedValue.Equals("0"))
-            {
-                getData(bll, Convert.ToInt32(ddlCategory.SelectedValue));
-                txtKeywords.Text = "";
-            }
-            else
-            {
-                getData(bll, "");
-            }
-        }
-
         protected void lnkAllLog_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Record.aspx?id=" + Request.QueryString["id"]);
+            Response.Redirect("PointLog.aspx?id=" + Request.QueryString["id"]);
         }
 
         protected void likHidden_Click(object sender, EventArgs e)
         {
             CouponBLL bll = new CouponBLL();
             getAccount(bll, Convert.ToInt32(Request.QueryString["id"]));
-            gvOrderList.DataSource = bll.getOrderList(Convert.ToInt32(Request.QueryString["id"]));
+            gvOrderList.DataSource = bll.getOrderPointList(Convert.ToInt32(Request.QueryString["id"]));
             gvOrderList.DataBind();
-            if (!ddlCategory.SelectedValue.Equals("0"))
-            {
-                getData(bll, Convert.ToInt32(ddlCategory.SelectedValue));
-            }
-            else
-            {
-                getData(bll, txtKeywords.Text);
-            }
+            getData(bll);
         }
 
     }

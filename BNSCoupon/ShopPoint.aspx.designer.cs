@@ -10,7 +10,7 @@
 namespace BNSCoupon {
     
     
-    public partial class Shop {
+    public partial class ShopPoint {
         
         /// <summary>
         /// form1 控件。
@@ -67,15 +67,6 @@ namespace BNSCoupon {
         protected global::System.Web.UI.WebControls.Label labConmmoid;
         
         /// <summary>
-        /// labCategory 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labCategory;
-        
-        /// <summary>
         /// labRemark 控件。
         /// </summary>
         /// <remarks>
@@ -94,22 +85,13 @@ namespace BNSCoupon {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trConst;
         
         /// <summary>
-        /// labCostprice 控件。
+        /// labPoint 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labCostprice;
-        
-        /// <summary>
-        /// labUnitprice 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labUnitprice;
+        protected global::System.Web.UI.WebControls.Label labPoint;
         
         /// <summary>
         /// labMaxs 控件。
@@ -157,15 +139,6 @@ namespace BNSCoupon {
         protected global::System.Web.UI.WebControls.LinkButton linkMax;
         
         /// <summary>
-        /// txtActurl 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActurl;
-        
-        /// <summary>
         /// trMore 控件。
         /// </summary>
         /// <remarks>
@@ -191,42 +164,6 @@ namespace BNSCoupon {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label labPrice;
-        
-        /// <summary>
-        /// hidHasPoint 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidHasPoint;
-        
-        /// <summary>
-        /// palPoint 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel palPoint;
-        
-        /// <summary>
-        /// labPoint 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labPoint;
-        
-        /// <summary>
-        /// hidPoint 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidPoint;
         
         /// <summary>
         /// labBalance 控件。

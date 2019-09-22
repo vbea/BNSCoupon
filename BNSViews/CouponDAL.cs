@@ -913,7 +913,7 @@ namespace BNSLogic
         /// <returns>数据集</returns>
         public DataSet getCommodityList(int id)
         {
-            string sql = "select id,name,category,cost,price,maxs,mark from Store where id=@id";
+            string sql = "select id,name,category,cost,price,maxs,mark,hasPoint from Store where id=@id";
             SqlConnection con = new SqlConnection(connectionString);
             SqlParameter para = new SqlParameter("@id", id);
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -946,9 +946,9 @@ namespace BNSLogic
         /// <param name="mark">说明</param>
         /// <param name="delete">是否删除</param>
         /// <returns>受影响的行数</returns>
-        public int addCommodity(string name, int category, int cost, int price, int maxs, string mark, int delete)
+        public int addCommodity(string name, int category, int cost, int price, int maxs, string mark, bool hasPoint)
         {
-            string sql = "insert into Store (name,category,cost,price,maxs,mark,isDelete) values (@name,@category,@cost,@price,@maxs,@mark,@delete)";
+            string sql = "insert into Store (name,category,cost,price,maxs,mark,hasPoint,isDelete) values (@name,@category,@cost,@price,@maxs,@mark,@hasPoint,@delete)";
             SqlParameter[] paras = { 
                                        new SqlParameter("@name",name),
                                        new SqlParameter("@category",category),
@@ -956,7 +956,8 @@ namespace BNSLogic
                                        new SqlParameter("@price",price),
                                        new SqlParameter("@maxs",maxs),
                                        new SqlParameter("@mark",mark),
-                                       new SqlParameter("@delete", delete)
+                                       new SqlParameter("@hasPoint", hasPoint),
+                                       new SqlParameter("@delete", false)
                                    };
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -985,9 +986,9 @@ namespace BNSLogic
         /// <param name="maxs">最大购买</param>
         /// <param name="mark">说明</param>
         /// <returns>受影响的行数</returns>
-        public int setCommodity(int id, string name, int category, int cost, int price, int maxs, string mark)
+        public int setCommodity(int id, string name, int category, int cost, int price, int maxs, string mark, bool hasPoint)
         {
-            string sql = "update Store set name=@name,category=@category,cost=@cost,price=@price,maxs=@maxs,mark=@mark where id=@id";
+            string sql = "update Store set name=@name,category=@category,cost=@cost,price=@price,maxs=@maxs,mark=@mark,hasPoint=@hasPoint where id=@id";
             SqlParameter[] paras = { 
                                        new SqlParameter("@name",name),
                                        new SqlParameter("@category",category),
@@ -995,6 +996,7 @@ namespace BNSLogic
                                        new SqlParameter("@price",price),
                                        new SqlParameter("@maxs",maxs),
                                        new SqlParameter("@mark",mark),
+                                       new SqlParameter("@hasPoint", hasPoint),
                                        new SqlParameter("@id", id)
                                    };
             SqlConnection con = new SqlConnection(connectionString);
@@ -1256,7 +1258,7 @@ namespace BNSLogic
         /// <returns>数据集</returns>
         public DataSet getCommodityListByCategory(int id)
         {
-            string sql = "select s.id,name,catename,cost,price,maxs,mark from Store s left join Category c on c.id=s.category where category=@id and isDelete=0";
+            string sql = "select s.id,name,catename,cost,price,maxs,mark,hasPoint from Store s left join Category c on c.id=s.category where category=@id and isDelete=0";
             SqlConnection con = new SqlConnection(connectionString);
             SqlParameter para = new SqlParameter("@id", id);
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -1285,7 +1287,7 @@ namespace BNSLogic
         /// <returns>数据集</returns>
         public DataSet getCommodityListById(int id)
         {
-            string sql = "select s.id,name,catename,cost,price,maxs,mark from Store s left join Category c on c.id=s.category where s.id=@id";
+            string sql = "select s.id,name,catename,cost,price,maxs,mark,hasPoint from Store s left join Category c on c.id=s.category where s.id=@id";
             SqlConnection con = new SqlConnection(connectionString);
             SqlParameter para = new SqlParameter("@id", id);
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -1324,6 +1326,253 @@ namespace BNSLogic
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.Parameters.AddRange(paras);
+            try
+            {
+                con.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 扣除账号点券和积分
+        /// </summary>
+        /// <param name="id">账号ID</param>
+        /// <param name="coupon">新的点券余额</param>
+        /// <returns>受影响的行数</returns>
+        public int deductCoupon(int id, long coupon, long point)
+        {
+            string sql = "update BNSCoupon set coupon=@coupon,point=@point where id=@id";
+            SqlParameter[] paras = {
+                                       new SqlParameter("@coupon",coupon),
+                                       new SqlParameter("@point",point),
+                                       new SqlParameter("@id",id)
+                                   };
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddRange(paras);
+            try
+            {
+                con.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 扣除账号积分
+        /// </summary>
+        /// <param name="id">账号ID</param>
+        /// <param name="coupon">新的积分余额</param>
+        /// <returns>受影响的行数</returns>
+        public int deductPoint(int id, long point)
+        {
+            string sql = "update BNSCoupon set point=@point where id=@id";
+            SqlParameter[] paras = {
+                                       new SqlParameter("@point",point),
+                                       new SqlParameter("@id",id)
+                                   };
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddRange(paras);
+            try
+            {
+                con.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
+
+        #region 积分商城表操作
+        /// <summary>
+        /// 获取积分商品列表
+        /// </summary>
+        /// <param name="id">分类ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getShopPontList()
+        {
+            string sql = "select id,name,point,maxs,mark from StorePoint where valid=1 order by id desc";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        /// <summary>
+        /// 获取所有积分商品列表
+        /// </summary>
+        /// <returns>数据集</returns>
+        public DataSet getPointData()
+        {
+            string sql = "select * from StorePoint";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        /// <summary>
+        /// 获取商品列表
+        /// </summary>
+        /// <param name="id">商品ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getPointData(int id)
+        {
+            string sql = "select id,name,point,maxs,mark from StorePoint where id=@id";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlParameter para = new SqlParameter("@id", id);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        /// <summary>
+        /// 添加商品数据
+        /// </summary>
+        /// <param name="name">商品名</param>
+        /// <param name="category">分类编号</param>
+        /// <param name="price">价格</param>
+        /// <param name="maxs">最大购买</param>
+        /// <param name="mark">说明</param>
+        /// <param name="delete">是否删除</param>
+        /// <returns>受影响的行数</returns>
+        public int addPointData(string name, int point, int maxs, string mark)
+        {
+            string sql = "insert into StorePoint (name,point,maxs,mark,valid) values (@name,@price,@maxs,@mark,@delete)";
+            SqlParameter[] paras = {
+                                       new SqlParameter("@name",name),
+                                       new SqlParameter("@price",point),
+                                       new SqlParameter("@maxs",maxs),
+                                       new SqlParameter("@mark",mark),
+                                       new SqlParameter("@delete", 1)
+                                   };
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddRange(paras);
+            try
+            {
+                con.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        /// <summary>
+        /// 修改商品信息
+        /// </summary>
+        /// <param name="name">商品名</param>
+        /// <param name="point">价格</param>
+        /// <param name="maxs">最大购买</param>
+        /// <param name="mark">说明</param>
+        /// <returns>受影响的行数</returns>
+        public int updatePointData(int id, string name, int point, int maxs, string mark)
+        {
+            string sql = "update StorePoint set name=@name,point=@price,maxs=@maxs,mark=@mark,valid=@valid where id=@id";
+            SqlParameter[] paras = {
+                                       new SqlParameter("@name",name),
+                                       new SqlParameter("@price",point),
+                                       new SqlParameter("@maxs",maxs),
+                                       new SqlParameter("@mark",mark),
+                                       new SqlParameter("@valid",1),
+                                       new SqlParameter("@id", id)
+                                   };
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddRange(paras);
+            try
+            {
+                con.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        /// <summary>
+        /// 修改商品信息
+        /// </summary>
+        /// <param name="id">商品ID</param>
+        /// <returns>受影响的行数</returns>
+        public int deletePointData(int id)
+        {
+            string sql = "update StorePoint set valid=0 where id=@id";
+            SqlParameter para = new SqlParameter("@id", id);
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
             try
             {
                 con.Open();
@@ -1539,6 +1788,228 @@ namespace BNSLogic
         public DataSet getOrderAll(int account)      
         {
             string sql = "select * from OrderLog where account=@id order by dates desc";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlParameter para = new SqlParameter("@id", account);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
+
+        #region 积分购买记录表数据操作
+        /// <summary>
+        /// 添加积分购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <param name="cid">商品ID</param>
+        /// <param name="cname">商品名称</param>
+        /// <param name="unit">单价</param>
+        /// <param name="count">数量</param>
+        /// <param name="price">总价</param>
+        /// <param name="date">购买时间</param>
+        /// <returns>受影响的行数</returns>
+        public int addPointLog(int account, int cid, string cname, int unit, int count, int price, DateTime date)
+        {
+            string sql = "insert into OrderLogPoint (account,cid,cname,cunit,ccount,point,dates) values (@account,@cid,@cname,@cunit,@ccount,@price,@dates)";
+            SqlParameter[] paras = {
+                                       new SqlParameter("@account",account),
+                                       new SqlParameter("@cid",cid),
+                                       new SqlParameter("@cname",cname),
+                                       new SqlParameter("@cunit",unit),
+                                       new SqlParameter("@ccount",count),
+                                       new SqlParameter("@price",price),
+                                       new SqlParameter("@dates", date)
+                                   };
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddRange(paras);
+            try
+            {
+                con.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        /// <summary>
+        /// 获取购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointList(int account)
+        {
+            string sql = "select top(10)* from OrderLogPoint where account=@id and DATEDIFF(m, dates, GETDATE())=0 order by dates desc";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlParameter para = new SqlParameter("@id", account);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 获取本月购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointThisMonth(int account)
+        {
+            string sql = "select * from OrderLogPoint where account=@id and DATEDIFF(m, dates, GETDATE())=0 order by dates desc";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlParameter para = new SqlParameter("@id", account);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 获取上月购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointLastMonth(int account)
+        {
+            string sql = "select * from OrderLogPoint where account=@id and DATEDIFF(m, dates, GETDATE())=1 order by dates desc";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlParameter para = new SqlParameter("@id", account);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 获取近三月购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointThreeMonth(int account)
+        {
+            string sql = "select * from OrderLogPoint where account=@id and DATEDIFF(m, dates, GETDATE())<=2 order by dates desc";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlParameter para = new SqlParameter("@id", account);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 获取三个月前购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointLastThreeMonth(int account)
+        {
+            string sql = "select * from OrderLogPoint where account=@id and DATEDIFF(m, dates, GETDATE())>2 order by dates desc";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlParameter para = new SqlParameter("@id", account);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add(para);
+            try
+            {
+                con.Open();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                sda.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 获取全部购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointAll(int account)
+        {
+            string sql = "select * from OrderLogPoint where account=@id order by dates desc";
             SqlConnection con = new SqlConnection(connectionString);
             SqlParameter para = new SqlParameter("@id", account);
             SqlCommand cmd = new SqlCommand(sql, con);

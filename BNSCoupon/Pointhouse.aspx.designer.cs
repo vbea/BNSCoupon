@@ -10,7 +10,7 @@
 namespace BNSCoupon {
     
     
-    public partial class Storehouse {
+    public partial class Pointhouse {
         
         /// <summary>
         /// litTitle 控件。
@@ -31,24 +31,6 @@ namespace BNSCoupon {
         protected global::System.Web.UI.WebControls.TextBox txtName;
         
         /// <summary>
-        /// ddlCategory 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
-        
-        /// <summary>
-        /// txtCost 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCost;
-        
-        /// <summary>
         /// txtPrice 控件。
         /// </summary>
         /// <remarks>
@@ -65,15 +47,6 @@ namespace BNSCoupon {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMaxs;
-        
-        /// <summary>
-        /// chkPoint 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkPoint;
         
         /// <summary>
         /// txtMark 控件。

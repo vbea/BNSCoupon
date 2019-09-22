@@ -58,9 +58,9 @@
         <font color="#F75733">关于：</font>
         <div class="div_set">
             <font color="#F75733">账号点券管理器</font><br />
-            版本：v3.2<br />
+            版本：v4.0<br />
             制作：邠心工作室<br />
-            更新时间：2019年07月28日<br />
+            更新时间：2019年09月22日<br />
             <br />
             <font size="3">&copy;2015-2019, VBE Studio</font>
         </div>

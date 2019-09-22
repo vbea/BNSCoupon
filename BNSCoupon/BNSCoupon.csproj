@@ -62,6 +62,7 @@
     <Content Include="AccountEdit.aspx" />
     <Content Include="BNSCoupon.aspx" />
     <Content Include="calendar.html" />
+    <Content Include="CommodityPoint.aspx" />
     <Content Include="Commodity.aspx" />
     <Content Include="Coupons.aspx" />
     <Content Include="css\common.css" />
@@ -114,10 +115,14 @@
     <Content Include="js\selectdate.js" />
     <Content Include="Money.aspx" />
     <Content Include="Preference.aspx" />
+    <Content Include="PointLog.aspx" />
     <Content Include="Record.aspx" />
     <Content Include="RecycleBin.aspx" />
     <Content Include="Settings.aspx" />
+    <Content Include="ShopPoint.aspx" />
     <Content Include="Shop.aspx" />
+    <Content Include="Pointhouse.aspx" />
+    <Content Include="StorePoint.aspx" />
     <Content Include="Store.aspx" />
     <Content Include="Storehouse.aspx" />
     <Content Include="Undercarriage.aspx" />
@@ -148,6 +153,13 @@
     </Compile>
     <Compile Include="BNSCoupon.aspx.designer.cs">
       <DependentUpon>BNSCoupon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommodityPoint.aspx.cs">
+      <DependentUpon>CommodityPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommodityPoint.aspx.designer.cs">
+      <DependentUpon>CommodityPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="Commodity.aspx.cs">
       <DependentUpon>Commodity.aspx</DependentUpon>
@@ -206,6 +218,13 @@
       <DependentUpon>Preference.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PointLog.aspx.cs">
+      <DependentUpon>PointLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PointLog.aspx.designer.cs">
+      <DependentUpon>PointLog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Record.aspx.cs">
       <DependentUpon>Record.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -227,12 +246,33 @@
     <Compile Include="Settings.aspx.designer.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ShopPoint.aspx.cs">
+      <DependentUpon>ShopPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShopPoint.aspx.designer.cs">
+      <DependentUpon>ShopPoint.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Shop.aspx.cs">
       <DependentUpon>Shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Shop.aspx.designer.cs">
       <DependentUpon>Shop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pointhouse.aspx.cs">
+      <DependentUpon>Pointhouse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pointhouse.aspx.designer.cs">
+      <DependentUpon>Pointhouse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StorePoint.aspx.cs">
+      <DependentUpon>StorePoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StorePoint.aspx.designer.cs">
+      <DependentUpon>StorePoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="Store.aspx.cs">
       <DependentUpon>Store.aspx</DependentUpon>

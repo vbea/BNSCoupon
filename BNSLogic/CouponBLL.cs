@@ -212,9 +212,9 @@ namespace BNSLogic
             return dal.getCommodityList(id);
         }
 
-        public bool addCommodity(string name, int category, int cost, int price, int maxs, string mark)
+        public bool addCommodity(string name, int category, int cost, int price, int maxs, string mark, bool hasPoint)
         {
-            return dal.addCommodity(name, category, cost, price, maxs, mark, 0) > 0;
+            return dal.addCommodity(name, category, cost, price, maxs, mark, hasPoint) > 0;
         }
 
         /// <summary>
@@ -226,9 +226,9 @@ namespace BNSLogic
         /// <param name="maxs">最大购买</param>
         /// <param name="mark">说明</param>
         /// <returns>是否成功</returns>
-        public bool setCommodity(int id, string name, int category, int cost, int price, int maxs, string mark)
+        public bool setCommodity(int id, string name, int category, int cost, int price, int maxs, string mark, bool hasPoint)
         {
-            return dal.setCommodity(id, name, category, cost, price, maxs, mark) > 0;
+            return dal.setCommodity(id, name, category, cost, price, maxs, mark, hasPoint) > 0;
         }
 
         public bool recycleCommodity(int id)
@@ -304,10 +304,49 @@ namespace BNSLogic
         {
             return dal.getCommodityListById(id);
         }
-
         public bool deductCoupon(int id, long coupon)
         {
             return dal.deductCoupon(id, coupon) > 0;
+        }
+        public bool deductCoupon(int id, long coupon, long point)
+        {
+            return dal.deductCoupon(id, coupon, point) > 0;
+        }
+        public bool deductPoint(int id, long point)
+        {
+            return dal.deductPoint(id, point) > 0;
+        }
+        #endregion
+
+        #region 积分商城表操作
+        /// <summary>
+        /// 获取积分商品列表
+        /// </summary>
+        /// <param name="id">分类ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getShopPontList()
+        {
+            return dal.getShopPontList();
+        }
+        public DataSet getPointData()
+        {
+            return dal.getPointData();
+        }
+        public DataSet getPointData(int id)
+        {
+            return dal.getPointData(id);
+        }
+        public bool addPointData(string name, int point, int maxs, string mark)
+        {
+            return dal.addPointData(name, point, maxs, mark) > 0;
+        }
+        public bool updatePointData(int id, string name, int point, int maxs, string mark)
+        {
+            return dal.updatePointData(id, name, point, maxs, mark) > 0;
+        }
+        public bool deletePointData(int id)
+        {
+            return dal.deletePointData(id) > 0;
         }
         #endregion
 
@@ -386,6 +425,84 @@ namespace BNSLogic
         public DataSet getOrderAll(int account)
         {
             return dal.getOrderAll(account);
+        }
+        #endregion
+
+        #region 积分购买记录表数据操作
+        /// <summary>
+        /// 添加购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <param name="cid">商品ID</param>
+        /// <param name="cname">商品名称</param>
+        /// <param name="unit">单价</param>
+        /// <param name="count">数量</param>
+        /// <param name="price">总价</param>
+        /// <param name="date">购买时间</param>
+        /// <returns>受影响的行数</returns>
+        public bool addPointLog(int account, int cid, string cname, int unit, int count, int price, DateTime date)
+        {
+            return dal.addPointLog(account, cid, cname, unit, count, price, date) > 0;
+        }
+
+        /// <summary>
+        /// 获取购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointList(int account)
+        {
+            return dal.getOrderPointList(account);
+        }
+
+        /// <summary>
+        /// 获取本月购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointThisMonth(int account)
+        {
+            return dal.getOrderPointThisMonth(account);
+        }
+
+        /// <summary>
+        /// 获取上月购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointLastMonth(int account)
+        {
+            return dal.getOrderPointLastMonth(account);
+        }
+
+        /// <summary>
+        /// 获取近三月购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointThreeMonth(int account)
+        {
+            return dal.getOrderPointThreeMonth(account);
+        }
+
+        /// <summary>
+        /// 获取三个月前购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointLastThreeMonth(int account)
+        {
+            return dal.getOrderPointLastThreeMonth(account);
+        }
+
+        /// <summary>
+        /// 获取全部购买记录
+        /// </summary>
+        /// <param name="account">账号ID</param>
+        /// <returns>数据集</returns>
+        public DataSet getOrderPointAll(int account)
+        {
+            return dal.getOrderPointAll(account);
         }
         #endregion
 

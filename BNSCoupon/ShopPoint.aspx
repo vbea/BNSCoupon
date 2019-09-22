@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Shop.aspx.cs" Inherits="BNSCoupon.Shop" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShopPoint.aspx.cs" Inherits="BNSCoupon.ShopPoint" %>
 
 <!DOCTYPE html>
 
@@ -28,7 +28,7 @@
                         <asp:Label ID="labAccount" runat="server" Text=""></asp:Label></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; width: 30%; color: #F55733;">账户余额：
+                    <td style="text-align: right; width: 30%; color: #F55733;">积分余额：
                     </td>
                     <td>
                         <asp:Label ID="labRemaining" runat="server"></asp:Label></td>
@@ -44,24 +44,14 @@
                         <asp:Label ID="labConmmoid" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; width: 30%; color: #F55733;">商品分类：</td>
-                    <td>
-                        <asp:Label ID="labCategory" runat="server"></asp:Label></td>
-                </tr>
-                <tr>
                     <td style="text-align: right; width: 30%; color: #F55733;">商品介绍：</td>
                     <td>
                         <asp:Label ID="labRemark" runat="server"></asp:Label></td>
                 </tr>
                 <tr runat="server" id="trConst">
-                    <td style="text-align: right; color: #F55733;">原价：</td>
+                    <td style="text-align: right; color: #F55733;">购买积分：</td>
                     <td class="auto-style2">
-                        <asp:Label ID="labCostprice" runat="server"></asp:Label></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right; color: #F55733;">单价：</td>
-                    <td class="auto-style2">
-                        <asp:Label ID="labUnitprice" runat="server"></asp:Label></td>
+                        <asp:Label ID="labPoint" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
                     <td style="text-align: right; width: 30%; color: #F55733;">最大购买数量：</td>
@@ -77,12 +67,6 @@
                         &nbsp;<asp:LinkButton ID="linkMax" runat="server" OnClick="linkMax_Click">最大</asp:LinkButton>
                     </td>
                 </tr>
-                <tr>
-                    <td style="text-align: right; width: 30%; color: #F55733;">超额购买：</td>
-                    <td>
-                        <asp:TextBox ID="txtActurl" runat="server" Style="width:100px; background-color: transparent; border-style: none;" AutoPostBack="True" OnTextChanged="txtActurl_TextChanged" MaxLength="4">1</asp:TextBox>
-                    </td>
-                </tr>
                 <tr id="trMore" runat="server" visible="false">
                     <td colspan="2" style="text-align:center;">
                         <span style="color: #F55733;">提示：</span><asp:Label ID="labShoptype" runat="server" Text=""></asp:Label>
@@ -91,17 +75,8 @@
                 <tr>
                     <td style="text-align: right; width: 30%; color: #F55733;">总价：</td>
                     <td>
-                        <asp:Label ID="labPrice" runat="server"></asp:Label>
-                        <asp:HiddenField ID="hidHasPoint" runat="server" />
-                    </td>
+                        <asp:Label ID="labPrice" runat="server"></asp:Label></td>
                 </tr>
-                <asp:Panel ID="palPoint" runat="server" Visible="true"><tr>
-                    <td style="text-align: right; width: 30%; color: #F55733;">可获积分：</td>
-                    <td>
-                        <asp:Label ID="labPoint" runat="server"></asp:Label>
-                        <asp:HiddenField ID="hidPoint" runat="server" />
-                    </td>
-                </tr></asp:Panel>
                 <tr>
                     <td style="text-align: right; width: 30%; color: #F55733;">购买后余额：</td>
                     <td>

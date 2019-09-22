@@ -38,6 +38,7 @@
                                     <li><a href="Vocation.aspx">职业</a></li>
                                     <li><a href="Preference.aspx">统计</a></li>
                                     <li><a href="Commodity.aspx">商城</a></li>
+                                    <li><a href="CommodityPoint.aspx">积分商城</a></li>
                                     <li><a href="Settings.aspx">设置</a></li>
                                     <li><a href="Help.aspx">帮助</a></li>
                                     <li><a href="http://bns.qq.com/main.shtml" target="_blank">官网</a></li>
